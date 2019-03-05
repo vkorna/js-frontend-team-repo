@@ -4,24 +4,31 @@
     <meta charset="utf-8"/>
     <title>hello-world</title>
     <link href="./style.css" rel="stylesheet">
+    <script src="to-do.js" defer></script>
   </head>
   <body>
-    <div class="list">
-      <div class="header">
-          <h3 class="title">Task Name</h3>
-          <div class="icon"></div>
+    <div class="app"> 
+      <div class="main-header">
+        <div class="header-logo">
+          <a href="test.html">
+            <img src="../resources/di-logo.svg" alt="CSGO Howl" style="float:left">
+          </a> 
+        </div>  
+        <div class="header-text">To</div>
+        <div class="header-line"></div>
+        <div class="header-text">do</div>  
       </div>
-      <div class="row">
-          <input class="checkbox" type="checkbox" id="task_1" name="task_1" checked>
-          <label for="task_1">Task 1</label>
-      </div>
-      <div class="row">
-          <input class="checkbox" type="checkbox" id="task_2" name="task_2">
-          <label for="task_2">Task 2</label>
-      </div>
-
-      <div class="add">add</div>
+      <div class="content"></div>
     </div>
-
+    <a class="plus-button" href="#sider">+</a>
+    <div id="sider" class="overlay">
+      <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+          Thank to pop me out of that button, but now i'm done so you can close this window.
+        </div>
+        <div class="sider-add">Add</div>
+      </div>
+    </div>
   </body>
 </html>

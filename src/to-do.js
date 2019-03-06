@@ -46,9 +46,11 @@ const handleAddTask = id => {
   const newTask = {id: generateId(), body: 'New Task'}
 
   data = data
-  .map(list => list.id === id ? { ...list, tasks: list.tasks.concat(newTask) } : list);
+    .map(list => list.id === id ? { ...list, tasks: list.tasks.concat(newTask) } : list);
   
-  const list = document.getElementById(id + '-content').appendChild(getTask(newTask));
+  const list = document
+    .getElementById(id + '-content')
+    .appendChild(getTask(newTask));
 
   console.log(data);
 }
@@ -68,6 +70,16 @@ const getListContent = (listId, tasks) => {
   return result;
 }
 
+const removeList = (listId) => {
+  console.log(`Id to be removed: ${listId}`);
+
+  data = data.filter(item => item.id !== listId);
+
+  console.log(data);
+
+  document.getElementById(listId).remove();
+}
+
 
 const getList = list => {
   const result = new DOMParser().parseFromString(
@@ -75,7 +87,7 @@ const getList = list => {
     <div class="list" id="${list.id}">
       <div class="header">
           <h3 class="title">${list.title}</h3>
-          <img class="icon" alt="Delete" src="../resources/trash.png">
+          <img class="icon" alt="Delete" onclick="removeList(${list.id})" src="../resources/trash.png">
       </div>
     </div>
     `,
@@ -103,3 +115,38 @@ const getList = list => {
 }
 
 data.forEach(elm => document.querySelector('.content').appendChild(getList(elm)));
+
+document.getElementById("plus-button")
+  .addEventListener(
+    'click',
+    () => { 
+      getSider();
+      document.getElementById("popup-close").addEventListener(
+        'click',
+        () => { console.log("close"); document.getElementById("sider").remove(); }
+      );
+    
+    }
+  )
+
+const getSider = () => {
+  const result = new DOMParser().parseFromString(
+    `
+    <div id="sider" class="overlay">
+      <div class="popup">
+        <a class="close" id="popup-close" href="#">&times;</a>
+        <div class="content">
+          Thank to pop me out of that button, but now i'm done so you can close this window.
+        </div>
+        <div class="sider-add">Add</div>
+      </div>
+    </div>
+    `,
+   "text/html" 
+  ).body.firstChild;
+
+  
+  document.querySelector("body").appendChild(result);
+  
+  return result;
+}
